@@ -144,17 +144,18 @@ main h3 {
 .cta-button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #007BFF;
+    background-color: #1987fc;
     color: #ffffff;
     text-decoration: none;
     border-radius: 5px;
     font-weight: bold;
     margin-top: 15px;
     transition: background-color 0.3s;
+    text-transform: uppercase;
 }
 
 .cta-button:hover {
-    background-color: #0056b3;
+    background-color: #0450a1;
 }
 
 /* Footer Styles */
