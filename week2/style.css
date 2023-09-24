@@ -4,6 +4,7 @@ body {
     padding: 0;
     font-family: 'Pangolin', cursive;
     color: #505050;
+    background-color: rgb(199, 118, 232);
 }
 
 /* Header Styles */
@@ -12,6 +13,8 @@ header {
     color: #fff;
     text-align: center;
     padding: 20px;
+    position:sticky;
+    top:0;
 }
 
 .headeraH1 {
