@@ -7,21 +7,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-  <style>
-   .gallery-container {
-	margin: 0 auto;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	margin-top: 40px;
-  }
 
-   .gallery-container img {
-	width: 24%;
-	margin-bottom: 20px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  }
-  </style>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -42,17 +28,89 @@
   
   <main class="services">
       <h1>Gallery</h1>
+  <!--Slide Show-->
+    <div class="container">
+      <div class="mySlides">
+        <div class="numbertext">1 / 8</div>
+        <img src="images/1.png" alt="Gallery Slider Image 1" class="slideshow-img">
+      </div>
+      <div class="mySlides">
+        <div class="numbertext">2 / 8</div>
+        <img src="images/2.png" alt="Gallery Slider Image 2" class="slideshow-img">
+      </div>
+      <div class="mySlides">
+        <div class="numbertext">3 / 8</div>
+        <img src="images/3.png" alt="Gallery Slider Image 3" class="slideshow-img">
+      </div>
+      <div class="mySlides">
+        <div class="numbertext">4 / 8</div>
+        <img src="images/4.png" alt="Gallery Slider Image 4" class="slideshow-img">
+      </div>
+      <div class="mySlides">
+        <div class="numbertext">5 / 8</div>
+        <img src="images/5.png" alt="Gallery Slider Image 5" class="slideshow-img">
+      </div>
+      <div class="mySlides">
+        <div class="numbertext">6 / 8</div>
+        <img src="images/6.png" alt="Gallery Slider Image 6" class="slideshow-img">
+      </div>
+      <div class="mySlides">
+        <div class="numbertext">7 / 8</div>
+        <img src="images/7.png" alt="Gallery Slider Image 7" class="slideshow-img">
+      </div>
+      <div class="mySlides">
+        <div class="numbertext">8 / 8</div>
+        <img src="images/8.png" alt="Gallery Slider Image 8" class="slideshow-img">
+      </div>
 
-		<div class="gallery-container">
-			<img src="images/1.jpeg" alt="Spa Image 1">
-			<img src="images/2.jpeg" alt="Spa Image 2">
-			<img src="images/3.jpeg" alt="Spa Image 3">
-			<img src="images/4.jpeg" alt="Spa Image 4">
-			<img src="images/5.jpeg" alt="Spa Image 5">
-			<img src="images/6.jpeg" alt="Spa Image 6">
-			<img src="images/7.jpeg" alt="Spa Image 7">
-			<img src="images/8.jpeg" alt="Spa Image 7">
+      <a class="prev" onclick="plusSlides(-1)"></a>
+      <a class="next" onclick="plusSlides(1)"></a>
+    </div>
+
+
+		<div class="slideshow-img">
+			<img src="images/1.png" alt="Gallery Slider Image 1">
+			<img src="images/2.png" alt="Gallery Slider Image 2">
+			<img src="images/3.png" alt="Gallery Slider Image 3">
+			<img src="images/4.png" alt="Gallery Slider Image 4">
+			<img src="images/5.png" alt="Gallery Slider Image 5">
+			<img src="images/6.png" alt="Gallery Slider Image 6">
+			<img src="images/7.png" alt="Gallery Slider Image 7">
+			<img src="images/8.png" alt="Gallery Slider Image 7">
 		</div>
+  
+  
+  <script>
+    //Variable declared to keep track of current slide.
+    let SlideIndex = 1;
+    showSlides(SlideIndex);
+
+    //Function to increase/decrease current slide number.
+    function plusSlides(n){
+      showSlides(SlideIndex +=n);
+    }
+    //Function to go to a specific slide in slideshow.
+    function currentSlide(n){
+      showSlides(SlideIndex = n);
+    }
+    //Main Function to display slideshow.
+    function showSlides(n){
+      let i;
+      //Variable declared to get all elements in 'mySlides' class.
+      let slides = document.getElementsByClassName("mySlides");
+      if (n > slides.length){SlideIndex = 1} //To loop back to first slide if next is clicked after last slide.
+      if (n < 1){SlideIndex = slides.length} //To loop back to last slide if prev is clicked before first slide.
+      //To hide all slides Initially.
+      for (i=0; i < slides.length; i++){
+        slides[i].style.display = "none";
+      }
+      
+      slides[SlideIndex-1].style.display="block"; //To display elements.
+    }
+    
+  </script>
+
+
    <!-- Call to Action -->
    <section class="cta-container">
     <h2>Ready to Experience Our Services?</h2>
@@ -69,6 +127,7 @@
       </ul>
     <p >&copy; 2024 Wanderlust Voyages | Travel Agency. All rights reserved.</p>
   </footer>
+  
  </div>
 </body>
 </html>
