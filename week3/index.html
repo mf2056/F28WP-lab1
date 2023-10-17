@@ -32,9 +32,34 @@
     </nav>
 
     <!-- Banner Section -->
-    <section class="banner-container">
+   <!-- <section class="banner-container">
       <img src="images/travel banner.svg" alt="Illustrative banner of travel destinations" class="centered-banner">
+    </section> -->
+
+    <!--The Replaced Banner Section with the slider -->
+    <section class="banner-container">
+      <img name="slide" alt="Illustrative banner of travel destinations" title="Travel Agency" width="70%"/>
     </section>
+
+
+    <script>
+      let imageIndex = 0;
+      const images = ["images/1.png","images/2.png",
+      "images/3.png","images/4.png","images/5.png",
+      "images/6.png","images/7.png","images/8.png"];
+      const TimeInterval = 4000;
+
+      function ChangeImage(){
+        const Element = document.getElementsByName('slide');
+        Element.src = images[imageIndex];
+        imageIndex = (imageIndex + 1) % images.length;
+      }
+
+      setInterval(ChangeImage,TimeInterval);
+      window.addEventListener('load', ChangeImage);
+
+    </script>
+
 
     <!-- Main Content Section -->
     <main class="services">
