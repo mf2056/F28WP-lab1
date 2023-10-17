@@ -50,7 +50,7 @@
       const TimeInterval = 4000;
 
       function ChangeImage(){
-        const Element = document.getElementsByName('slide');
+        const Element = document.getElementsByName('slide')[0];
         Element.src = images[imageIndex];
         imageIndex = (imageIndex + 1) % images.length;
       }
