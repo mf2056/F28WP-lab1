@@ -1,15 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - Wanderlust Voyages</title>
+    <title>Registration Form</title>
+
     <style>
+    /* Style for the form: setting width, auto margin for centering, padding,
+    background color, border radius for rounded corners, and font size */
+    #form {
+        width: 300px;
+        margin: 20vh auto 0 auto; /* This centers the form vertically and horizontally */
+        padding: 20px;
+        background-color: whitesmoke; /* Light gray background for the form */
+        border-radius: 4px; /* Rounded corners for the form */
+        font-size: 12px;
+    }
+
+    /* Style for the form's heading: setting the text color and alignment */
+    #form h1 {
+        color: #0f2027; /* Dark text color for the heading */
+        text-align: center; /* Center-align the heading */
+    }
+
+    /* Style for the form's button: padding, top margin, full width, text color,
+    background color, no border, and rounded corners */
+    #form button {
+        padding: 10px;
+        margin-top: 10px; /* Space above the button */
+        width: 100%; /* Make the button expand the full width of the form */
+        color: white; /* White text color for the button */
+        background-color: rgb(41, 57, 194); /* Blue background color for the button */
+        border: none; /* Remove the default border */
+        border-radius: 4px; /* Rounded corners for the button */
+    }
+
+    /* Container for input fields: using flexbox for layout, column direction */
+    .input-control {
+        display: flex;
+        flex-direction: column; /* Stack the children (label, input, error message) vertically */
+    }
+
+    /* Style for input fields inside the container: border style, rounded corners,
+    block-level display, font size, padding, full width */
+    .input-control input {
+        border: 2px solid #f0f0f0; /* Light gray border for the inputs */
+        border-radius: 4px; /* Rounded corners for the inputs */
+        display: block; /* Display input field as a block */
+        font-size: 12px; /* Text size within the input field */
+        padding: 10px; /* Space inside the input field */
+        width: 100%; /* Input field takes up 100% of the form's width */
+    }
+
+    /* Remove focus outline from input fields */
+    .input-control input:focus {
+        outline: 0; /* Remove outline when input is focused */
+    }
+
+    /* Style for input fields with class "success": green border */
+    .input-control.success input {
+        border-color: #09c372; /* Green border to indicate successful input */
+    }
+
+    /* Style for input fields with class "error": red border */
+    .input-control.error input {
+        border-color: #ff3860; /* Red border to indicate an error in input */
+    }
+
+    /* Style for the error message: text color, font size, and height */
+    .input-control .error {
+        color: #ff3860; /* Red text color for error messages */
+        font-size: 9px; /* Smaller font size for error messages */
+        height: 13px; /* Explicit height to ensure consistent spacing */
+    }
+    
 
     </style>
 </head>
 
 <body>
-<p>form is this</p>
+
+<form id="Form">
+    <h1>REGISTRATION FORM</h1>
+    <div class="input-control">
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username"> <br>
+    <div class="error"></div>
+    
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email"> <br>
+    <div class="error"></div>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password"> <br>
+    <div class="error"></div>
+
+    <label for="cpassword">Confirm Password:</label>
+    <input type="password" id="cpassword" name="cpassword"> <br>
+    <div class="error"></div>
+
+    <button type="submit">Submit</button>
+    </div>
+</form>
+
+    <script>
+        
+        const form = document.getElementById("Form");
+
+        form.addEventListener("submit", event => {
+            event.preventDefault();
+
+            validateName();
+            validateEmail();
+            validatePassword();
+            validateConfirmPassword()
+
+        });
+    
+        const callError = (element,message) => { 
+            const inputControl = element.parentElement;
+            const errorDisplay = inputControl.querySelector(".error");
+
+            errorDisplay.innerText = message;
+            inputControl.classList.add("error");
+            inputControl.classList.remove("success");
+        }
+
+        const callSuccess = (element) => {
+            const inputControl = element.parentElement;
+            const successDisplay = inputControl.querySelector(".success");
+
+            inputControl.classList.add("success");
+            inputControl.classList.remove("error");
+        }
+
+        function validateName() {
+            let username = document.getElementById("username");
+            if(username.value.trim() ==="") {
+                callError(username, "Username is required");
+            } else {
+                callSuccess(username);
+            }
+        };
+
+        function validateEmail() {
+            let email = document.getElementById("email");
+            if(email.value.trim() ==="") {
+                callError(email, "Email is required");
+            } else if (!email.value.trim().toLowerCase().endsWith("@gmail.com")) {
+                callError(email, "Email does not match a standard email format");
+            }
+            else {
+                callSuccess(email);
+            }
+        };
+
+        function validatePassword() {
+            let password = document.getElementById("password");
+            if(password.value.trim() ==="") {
+                callError(password, "Password is required");
+            } else if(password.value.length < 8) {
+                callError(password, "Password must be atleast 8 characters long")
+            } else {
+                callSuccess(password);
+            }
+        };
+
+        function validateConfirmPassword() {
+            let cpassword = document.getElementById("cpassword");
+            let password = document.getElementById("password");
+            if(cpassword.value.trim() ==="") {
+                callError(cpassword, "Password is required");
+            } else if (cpassword.value !== password.value) {
+                callError(cpassword, "Passwords do not match");
+            } else {
+                callSuccess(cpassword);
+            }
+        };
+
+    </script>
+
 </body>
 </html>
