@@ -82,34 +82,44 @@
 
 <form id="Form">
     <h1>REGISTRATION FORM</h1>
-    <div class="input-control"></div>
+    <div class="input-control">
     <label for="username">Username:</label>
     <input type="text" id="username" name="username"> <br>
     <div class="error"></div>
     
-    <div class="input-control"></div>
     <label for="email">Email:</label>
     <input type="email" id="email" name="email"> <br>
     <div class="error"></div>
 
-    <div class="input-control"></div>
     <label for="password">Password:</label>
     <input type="password" id="password" name="password"> <br>
     <div class="error"></div>
 
-    <div class="input-control"></div>
     <label for="cpassword">Confirm Password:</label>
     <input type="password" id="cpassword" name="cpassword"> <br>
     <div class="error"></div>
 
-    <button type="submit">Submit</button>
+    <button type="submit" value="Submit"></button>
+</div>
 </form>
 
     <script>
         
         const form = document.getElementById("Form");
-        form.addEventListener("submit", function (event) {
-            let valid = true;
+        const username = document.getElementById("username");
+        const email = document.getElementById("email");
+        const password = document.getElementById("password");
+        const cpassword = document.getElementById("cpassword");
+
+        form.addEventListener("submit", event => {
+            event.preventDefault();
+
+            validateName();
+            validateEmail();
+            validatePassword();
+            validateConfirmPassword()
+
+        });
     
         const callError = (element,message) => { 
             const inputControl = element.parentElement;
@@ -124,26 +134,26 @@
             const inputControl = element.parentElement;
             const successDisplay = inputControl.querySelector(".success");
 
+            inputControl.classList.add("error");
+            inputControl.classList.remove("success");
+
         }
 
         const validateName = () => {
-            const username = document.getElementById("username");
-            if(username.value.trim() ==="") {
+            const uservalue = username.value.trim();
+            if(uservalue ==="") {
                 callError(username, "Username is required");
-                valid = false;
             } else {
                 callSuccess(username);
             }
         };
 
         const validateEmail = () => {
-            const email = document.getElementById("email");
-            if(email.value.trim() ==="") {
+            const emailvalue = email.value.trim()
+            if(emailvalue ==="") {
                 callError(email, "Email is required");
-                valid = false;
-            } else if (!email.value.trim().toLowerCase().endsWith("@gmail.com")) {
+            } else if (!emailvalue.toLowerCase().endsWith("@gmail.com")) {
                 callError(email, "Email does not match a standard email format");
-                valid = false;
             }
             else {
                 callSuccess(email);
@@ -151,44 +161,26 @@
         };
 
         const validatePassword = () => {
-            const password = document.getElementById("password");
-            if(password.value.trim() ==="") {
+            const passvalue = password.value.trim()
+            if(passvalue ==="") {
                 callError(password, "Password is required");
-                valid = false;
             } else if(password.value.length < 8) {
                 callError(password, "Password must be atleast 8 characters long")
-                valid = false;
             } else {
                 callSuccess(password);
             }
         };
 
         const validateConfirmPassword = () => {
-            const cpassword = document.getElementById("cpassword");
-            const password = document.getElementById("password");
-            if(cpassword.value.trim() ==="") {
+            const cpassvalue = cpassword.value.trim()
+            if(cpassvalue ==="") {
                 callError(cpassword, "Password is required");
-                valid = false;
             } else if (cpassword.value !== password.value) {
                 callError(cpassword, "Passwords do not match");
-                valid = false;
             } else {
                 callSuccess(cpassword);
             }
         };
-        
-        if (valid!== true) {
-            event.preventDefault();
-        } else {
-            alert("Form Submitted");
-        }
-
-            validateName();
-            validateEmail();
-            validatePassword();
-            validateConfirmPassword()
-
-        });
 
     </script>
 
