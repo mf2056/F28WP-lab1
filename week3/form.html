@@ -108,16 +108,8 @@
     <script>
         
         const form = document.getElementById("Form");
-
-        form.addEventListener("submit", event => {
-            event.preventDefault();
-
-            validateName();
-            validateEmail();
-            validatePassword();
-            validateConfirmPassword()
-
-        });
+        form.addEventListener("submit", function (event) {
+            let valid = true;
     
         const callError = (element,message) => { 
             const inputControl = element.parentElement;
@@ -128,29 +120,30 @@
             inputControl.classList.remove("success");
         }
 
-        const callSuccess = (element) => {
+        const callSuccess = element => {
             const inputControl = element.parentElement;
             const successDisplay = inputControl.querySelector(".success");
 
-            inputControl.classList.add("success");
-            inputControl.classList.remove("error");
         }
 
         const validateName = () => {
-            let username = document.getElementById("username");
+            const username = document.getElementById("username");
             if(username.value.trim() ==="") {
                 callError(username, "Username is required");
+                valid = false;
             } else {
                 callSuccess(username);
             }
         };
 
         const validateEmail = () => {
-            let email = document.getElementById("email");
+            const email = document.getElementById("email");
             if(email.value.trim() ==="") {
                 callError(email, "Email is required");
+                valid = false;
             } else if (!email.value.trim().toLowerCase().endsWith("@gmail.com")) {
                 callError(email, "Email does not match a standard email format");
+                valid = false;
             }
             else {
                 callSuccess(email);
@@ -158,27 +151,44 @@
         };
 
         const validatePassword = () => {
-            let password = document.getElementById("password");
+            const password = document.getElementById("password");
             if(password.value.trim() ==="") {
                 callError(password, "Password is required");
+                valid = false;
             } else if(password.value.length < 8) {
                 callError(password, "Password must be atleast 8 characters long")
+                valid = false;
             } else {
                 callSuccess(password);
             }
         };
 
         const validateConfirmPassword = () => {
-            let cpassword = document.getElementById("cpassword");
-            let password = document.getElementById("password");
+            const cpassword = document.getElementById("cpassword");
+            const password = document.getElementById("password");
             if(cpassword.value.trim() ==="") {
                 callError(cpassword, "Password is required");
+                valid = false;
             } else if (cpassword.value !== password.value) {
                 callError(cpassword, "Passwords do not match");
+                valid = false;
             } else {
                 callSuccess(cpassword);
             }
         };
+        
+        if (valid!== true) {
+            event.preventDefault();
+        } else {
+            alert("Form Submitted");
+        }
+
+            validateName();
+            validateEmail();
+            validatePassword();
+            validateConfirmPassword()
+
+        });
 
     </script>
 
